@@ -1,5 +1,7 @@
 # Prerequisites
 *.d
+*.P
+*.lss
 
 # Object files
 *.o
