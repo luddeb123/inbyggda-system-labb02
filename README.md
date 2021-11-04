@@ -17,3 +17,26 @@ Använd samma LEDar och resistorer som i labb 1
     * Inkrementera en räknarvariabel, och när denna når 10; nollställ den och toggla LEDen. Detta för att förenkla, ögat ser inte blinkningarna i 100 Hz, så vi delar ner frekvensen till 10 Hz. Skriv och testa gärna den här delen innan du kopplar in timer-koden.
 
 4. Städa upp din kod och skapa en git-commit med ovanstående
+
+##### DELUPPGIFT 2: VARIERA LJUSSTYRKAN MED PWM
+1. Koppla upp en LED med resistor på den Arduino-expansionsport som motsvarar OC0A på ATMegan. Sätt upp den som utgång.
+
+2. Konfigurera om timer0:
+    * Fast PWM-mod, 0xFF som TOP, Non-inverting mode.
+    * Prescaler = 64. Ange i git-commiten vilken PWM-frekvens det resulterar i samt beräkningen du använde.
+
+3. Prova att variera ljusstyrka/duty cycle genom att skriva ett par olika värden till OCR0A, och visa att det fungerar genom att periodiskt växla mellan dem med en enkel loop och fördröjning mellan varje ändring. Välj värdena så att man tydligt ser skillnader.
+
+4. Städa upp din kod och skapa en git-commit med ovanstående förändringar.
+
+
+##### DELUPPGIFT 3 (VG-KRAV): LED-RAMPNING
+1. Konfigurera timer0 som Fast PWM enligt ovan, och timer2 som enkel timer i CTC-mod, periodtid 16 ms.
+
+2. Städa upp ovanstående och bryt ut till en `timer_init()`-funktion
+
+3. Deklarera och implementera en funktion `uint8_t simple_ramp()` som vid varje anrop returnerar ett värde mellan 0–255. Värdet ska börja på 0, och för varje anrop inkrementeras, tills det når 255. Därefter ska det dekrementeras ner till 0, varpå cykeln börjar om.
+
+4. Anropa funktionen periodiskt med hjälp av timer2 och använd returvärdet som duty cycle för LEDens PWM-styrning. Förväntat beteende är att LEDen synligt pulserar av och på
+
+5. Städa upp och skapa en git-commit med ovanstående förändring.
