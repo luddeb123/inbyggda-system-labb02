@@ -15,3 +15,12 @@ void led_init() {
 void toggle_led() {
 	PORTB ^= (1 << BLUE);
 }
+
+uint8_t simple_ramp(uint8_t *pwm, uint8_t *dir){
+    if(*pwm == 255 || *pwm == 0){
+        *dir *= -1;
+    }
+    *pwm += *dir;
+    return *pwm;
+}
+
