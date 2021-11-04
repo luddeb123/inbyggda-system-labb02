@@ -10,19 +10,20 @@
 
 int main (void) {
     int overflowCount = 0;
+	uint8_t direction = 1;
+	uint8_t pwmvalue = 0;
 
     uart_init();
-    timer_init();
-    led_init();
+	timer0_init();
+	timer2_init();
+	led_init();
 
-    while (1) {
-        OCR2A = 50;
-        _delay_ms(1000);
-        OCR2A = 100;
-        _delay_ms(1000);
-        OCR2A = 150;
-        _delay_ms(1000);
-        OCR2A = 200;
-        _delay_ms(1000);
-    }
+
+	while (1) {
+		if(TIFR0 & (1<<OCF0A)){ // kollar timer 2 ifall värdet är över 0
+			TIFR0 |= (1<<OCF0A); // tömmer flaggan
+			OCR2A = simple_ramp(&pwmvalue, &direction); // uppdaterar timer0
+		}
+	}
 }
+

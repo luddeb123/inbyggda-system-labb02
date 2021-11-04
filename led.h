@@ -11,5 +11,7 @@
 
 void led_init(void);
 void toggle_led(void);
+uint8_t simple_ramp(uint8_t *, uint8_t *);
 
 #endif // _LED_H_
+
